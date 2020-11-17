@@ -81,4 +81,10 @@ app.get("/attendance/:date", (req, res) => {
   );
 });
 
+const newDate = new Date();
+
+app.get("/date", (req, res) => {
+  res.send(newDate);
+});
+
 app.listen(port, () => console.log(`Server is running on port ${port}`));
