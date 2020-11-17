@@ -21,6 +21,8 @@ con.connect((err) => {
 
 const app = express();
 
+// Create tables
+
 con.query("SHOW tables like 'students'", (err, result) => {
   if (err) {
     throw err;
@@ -56,6 +58,8 @@ con.query("SHOW tables like 'attendance'", (err, result) => {
 app.use(bodyParser.json());
 app.use(cors());
 
+// GET student data from table
+
 app.get("/students", (req, res) => {
   con.query("SELECT * FROM students", (err, result) => {
     if (err) {
@@ -66,6 +70,8 @@ app.get("/students", (req, res) => {
     }
   });
 });
+
+// GET attendants and filter by date
 
 app.get("/attendance/:date", (req, res) => {
   con.query(
@@ -81,11 +87,15 @@ app.get("/attendance/:date", (req, res) => {
   );
 });
 
+// Create and verify the date
+
 const newDate = new Date();
 
 app.get("/date", (req, res) => {
   res.send(newDate);
 });
+
+// DELETE from table with a password
 
 app.delete("/delete/:id", (req, res) => {
   if (req.body.pass === "gaidys") {
@@ -104,9 +114,10 @@ app.delete("/delete/:id", (req, res) => {
   }
 });
 
+// POST data to attendance table and validate
+
 app.post("/attendance", (req, res) => {
   const data = req.body;
-
   if (data.student_id && data.date && data.attendance == "true") {
     con.query(
       `INSERT INTO attendance (student_id, date, attendance) VALUES ('${data.student_id}', '${data.date}', '${data.attendance}')`,
