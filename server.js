@@ -104,4 +104,24 @@ app.delete("/delete/:id", (req, res) => {
   }
 });
 
+app.post("/attendance", (req, res) => {
+  const data = req.body;
+
+  if (data.student_id && data.date && data.attendance == "true") {
+    con.query(
+      `INSERT INTO attendance (student_id, date, attendance) VALUES ('${data.student_id}', '${data.date}', '${data.attendance}')`,
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(400).send("Not sent");
+        } else {
+          res.json(result);
+        }
+      }
+    );
+  } else {
+    res.status(400).send("Not sent");
+  }
+});
+
 app.listen(port, () => console.log(`Server is running on port ${port}`));
