@@ -87,14 +87,6 @@ app.get("/attendance/:date", (req, res) => {
   );
 });
 
-// Create and verify the date
-
-const newDate = new Date();
-
-app.get("/date", (req, res) => {
-  res.send(newDate);
-});
-
 // DELETE from table with a password
 
 app.delete("/delete/:id", (req, res) => {
