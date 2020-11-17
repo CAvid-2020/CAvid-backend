@@ -87,4 +87,21 @@ app.get("/date", (req, res) => {
   res.send(newDate);
 });
 
+app.delete("/delete/:id", (req, res) => {
+  if (req.body.pass === "gaidys") {
+    con.query(
+      `DELETE FROM attendance WHERE student_id = '${req.params.id}'`,
+      (err, result) => {
+        if (err) {
+          res.status(400).json(err);
+        } else {
+          res.json(result);
+        }
+      }
+    );
+  } else {
+    res.status(400).send("Bad request");
+  }
+});
+
 app.listen(port, () => console.log(`Server is running on port ${port}`));
