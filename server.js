@@ -21,6 +21,38 @@ con.connect((err) => {
 
 const app = express();
 
+con.query("SHOW tables like 'students'", (err, result) => {
+  if (err) {
+    throw err;
+  } else if (result.length === 0) {
+    con.query(
+      "CREATE TABLE students (id INT AUTO_INCREMENT PRIMARY KEY, name TEXT, surname TEXT, email TEXT)",
+      (err, result) => {
+        if (err) throw err;
+        console.log("Table 'students' created!");
+      }
+    );
+  } else {
+    console.log("Table 'student' found: " + result.length);
+  }
+});
+
+con.query("SHOW tables like 'attendance'", (err, result) => {
+  if (err) {
+    throw err;
+  } else if (result.length === 0) {
+    con.query(
+      "CREATE TABLE attendance (id INT AUTO_INCREMENT PRIMARY KEY, student_id INT, date TIMESTAMP, attendance TEXT)",
+      (err, result) => {
+        if (err) throw err;
+        console.log("Table 'attendance' created!");
+      }
+    );
+  } else {
+    console.log("Table 'attendance' found: " + result.length);
+  }
+});
+
 app.use(bodyParser.json());
 app.use(cors());
 
