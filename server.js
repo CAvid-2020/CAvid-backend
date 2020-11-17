@@ -56,8 +56,29 @@ con.query("SHOW tables like 'attendance'", (err, result) => {
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("This boilerplate is working!");
+app.get("/students", (req, res) => {
+  con.query("SELECT * FROM students", (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send("Not Ok");
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+app.get("/attendance/:date", (req, res) => {
+  con.query(
+    `SELECT * FROM attendance WHERE date='${req.params.date}'`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(400).send("Not Ok");
+      } else {
+        res.json(result);
+      }
+    }
+  );
 });
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));
