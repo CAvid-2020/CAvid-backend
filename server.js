@@ -58,6 +58,13 @@ con.query("SHOW tables like 'attendance'", (err, result) => {
 app.use(bodyParser.json());
 app.use(cors());
 
+// GET date and time
+
+app.get("/date", (req, res) => {
+  const date = new Date().getHours();
+  res.json(date);
+});
+
 // GET student data from table
 
 app.get("/students", (req, res) => {
