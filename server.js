@@ -71,23 +71,7 @@ app.get("/students", (req, res) => {
   });
 });
 
-// GET attendants and filter by date
-
-// app.get("/attendance/:date", (req, res) => {
-//   con.query(
-//     `SELECT * FROM attendance WHERE date='${req.params.date}'`,
-//     (err, result) => {
-//       if (err) {
-//         console.log(err);
-//         res.status(400).send("Not Ok");
-//       } else {
-//         res.json(result);
-//       }
-//     }
-//   );
-// });
-
-// GET attendants and filter by date
+// GET attendants and merge two tables
 
 app.get("/attendance", (req, res) => {
   con.query(
