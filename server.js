@@ -73,9 +73,25 @@ app.get("/students", (req, res) => {
 
 // GET attendants and filter by date
 
-app.get("/attendance/:date", (req, res) => {
+// app.get("/attendance/:date", (req, res) => {
+//   con.query(
+//     `SELECT * FROM attendance WHERE date='${req.params.date}'`,
+//     (err, result) => {
+//       if (err) {
+//         console.log(err);
+//         res.status(400).send("Not Ok");
+//       } else {
+//         res.json(result);
+//       }
+//     }
+//   );
+// });
+
+// GET attendants and filter by date
+
+app.get("/attendance", (req, res) => {
   con.query(
-    `SELECT * FROM attendance WHERE date='${req.params.date}'`,
+    "SELECT a.id, b.date, b.attendance, a.name, a.surname, a.email FROM students a INNER JOIN attendance b ON a.id = b.student_id",
     (err, result) => {
       if (err) {
         console.log(err);
@@ -85,14 +101,6 @@ app.get("/attendance/:date", (req, res) => {
       }
     }
   );
-});
-
-// Create and verify the date
-
-const newDate = new Date();
-
-app.get("/date", (req, res) => {
-  res.send(newDate);
 });
 
 // DELETE from table with a password
