@@ -91,7 +91,7 @@ app.get("/students", (req, res) => {
 
 app.get("/attendance", (req, res) => {
   con.query(
-    "SELECT a.id, b.date, b.attendance, a.name, a.surname, a.email FROM students a INNER JOIN attendance b ON a.id = b.student_id",
+    "SELECT b.id, b.student_id, b.date, b.attendance, a.name, a.surname, a.email FROM students a INNER JOIN attendance b ON a.id = b.student_id",
     (err, result) => {
       if (err) {
         console.log(err);
@@ -108,7 +108,7 @@ app.get("/attendance", (req, res) => {
 app.delete("/delete/:id", (req, res) => {
   if (req.body.pass === "gaidys") {
     con.query(
-      `DELETE FROM attendance WHERE student_id = '${req.params.id}'`,
+      `DELETE FROM attendance WHERE id = '${req.params.id}'`,
       (err, result) => {
         if (err) {
           res.status(400).json(err);
