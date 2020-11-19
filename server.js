@@ -110,7 +110,14 @@ app.delete("/delete/:id", (req, res) => {
 
 app.post("/attendance", (req, res) => {
   const data = req.body;
-  if (data.student_id && data.date && data.attendance == "true") {
+  const time = new Date().toHours();
+  if (
+    data.student_id &&
+    data.attendance &&
+    data.date &&
+    time >= 16 &&
+    time <= 22
+  ) {
     con.query(
       `INSERT INTO attendance (student_id, date, attendance) VALUES ('${data.student_id}', '${data.date}', '${data.attendance}')`,
       (err, result) => {
