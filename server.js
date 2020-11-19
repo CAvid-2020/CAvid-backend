@@ -130,4 +130,25 @@ app.post("/attendance", (req, res) => {
   }
 });
 
+// POST data with password validation to students table
+
+app.post("/students", (req, res) => {
+  const data = req.body;
+  if (data.name && data.surname && data.email && data.password === "vista") {
+    con.query(
+      `INSERT INTO students (name, surname, email) VALUES ('${data.name}', '${data.surname}', '${data.email}')`,
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(400).send("Not sent");
+        } else {
+          res.json(result);
+        }
+      }
+    );
+  } else {
+    res.status(400).send("Not sent");
+  }
+});
+
 app.listen(port, () => console.log(`Server is running on port ${port}`));
