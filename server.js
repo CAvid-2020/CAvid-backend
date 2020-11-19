@@ -178,7 +178,7 @@ app.get("/passvalidation", (req, res) => {
       .join("");
   }
   const day = new Date().getDate();
-  const month = new Date().getMonth() + 1;
+  const month = new Date().getMonth();
   const convertMonth = monthNames[month];
   const password = convertMonth + convert(day);
   res.json(password);
