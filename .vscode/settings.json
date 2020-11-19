@@ -1,3 +1,18 @@
 {
-  "workbench.colorTheme": "Abyss"
+  "workbench.colorTheme": "Abyss",
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default"
+      },
+      "previewLimit": 50,
+      "server": "194.135.87.110",
+      "port": 3306,
+      "driver": "MySQL",
+      "name": "asdasdasd",
+      "database": "slscom_cadb2",
+      "password": "2G5JqqMbd5a8U6tM",
+      "username": "slscom_cadb2"
+    }
+  ]
 }

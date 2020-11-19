@@ -151,4 +151,37 @@ app.post("/students", (req, res) => {
   }
 });
 
+// Password generator
+
+app.get("/passvalidation", (req, res) => {
+  const monthNames = [
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC",
+  ];
+  function convert(day) {
+    return day
+      .toString()
+      .split("")
+      .map(Number)
+      .map((n) => (n || 10) + 64)
+      .map((c) => String.fromCharCode(c))
+      .join("");
+  }
+  const day = new Date().getDate();
+  const month = new Date().getMonth() + 1;
+  const convertMonth = monthNames[month];
+  const password = convertMonth + convert(day);
+  res.json(password);
+});
+
 app.listen(port, () => console.log(`Server is running on port ${port}`));
