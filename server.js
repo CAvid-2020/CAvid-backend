@@ -106,6 +106,23 @@ app.delete("/delete/:id", (req, res) => {
   }
 });
 
+app.delete("/students/delete/:id", (req, res) => {
+  if (req.body.pass === "kalakutas") {
+    con.query(
+      `DELETE FROM students WHERE id = '${req.params.id}'`,
+      (err, result) => {
+        if (err) {
+          res.status(400).json(err);
+        } else {
+          res.json(result);
+        }
+      }
+    );
+  } else {
+    res.status(400).send("Bad request");
+  }
+});
+
 // POST data to attendance table and validate
 
 app.post("/attendance", (req, res) => {
