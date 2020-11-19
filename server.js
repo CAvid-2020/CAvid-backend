@@ -110,7 +110,7 @@ app.delete("/delete/:id", (req, res) => {
 
 app.post("/attendance", (req, res) => {
   const data = req.body;
-  const time = new Date().toHours();
+  const time = new Date().getHours();
   const date = new Date().toISOString().slice(0, 19).replace("T", " ");
   const attendance = true;
   if (data.student_id && time >= 16 && time <= 22) {
